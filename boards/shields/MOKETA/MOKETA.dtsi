@@ -26,26 +26,29 @@
 
 kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
-	wakeup-source;
+        wakeup-source;
         diode-direction = "col2row";
 
+        /* Контроллер стоит перевернутым (светодиодами вверх), поэтому
+           каждый пин заменен на зеркальный по ряду сокета:
+           2<->21, 3<->20, 4<->19, 5<->18, 6<->15, 7<->14, 8<->16, 9<->10 */
         row-gpios
-            = <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* было 2  */
+            , <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* было 21 */
+            , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* было 3  */
+            , <&pro_micro 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* было 20 */
+            , <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* было 4  */
+            , <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* было 19 */
+            , <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* было 10 */
             ;
 
         col-gpios
-            = <&pro_micro 5 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 6 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 7 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 18 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 15 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 14 GPIO_ACTIVE_HIGH>
+            = <&pro_micro 18 GPIO_ACTIVE_HIGH>  /* было 5  */
+            , <&pro_micro 15 GPIO_ACTIVE_HIGH>  /* было 6  */
+            , <&pro_micro 14 GPIO_ACTIVE_HIGH>  /* было 7  */
+            , <&pro_micro 5 GPIO_ACTIVE_HIGH>   /* было 18 */
+            , <&pro_micro 6 GPIO_ACTIVE_HIGH>   /* было 15 */
+            , <&pro_micro 7 GPIO_ACTIVE_HIGH>   /* было 14 */
             ;
 
     };
